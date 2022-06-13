@@ -1,0 +1,42 @@
+db.CUSTOMER.find().sort({name:1}).pretty()
+{ _id: ObjectId("62a6bb34995566e7a13d1405"),
+  name: 'Anju',
+  address: 'Anju Bhavan',
+  city: 'Malapuram',
+  age: '40',
+  phone_no: '12345645' }
+{ _id: ObjectId("62a6bb68995566e7a13d1407"),
+  name: 'Nayana',
+  address: 'Nayans',
+  city: 'Kozhikode',
+  age: '50',
+  phone_no: '97890642' }
+{ _id: ObjectId("62a6bb68995566e7a13d1409"),
+  name: 'Surya',
+  address: 'white house',
+  city: 'kochi',
+  age: '43',
+  phone_no: '9048857036' }
+{ _id: ObjectId("62a6bb68995566e7a13d1408"),
+  name: 'jimin',
+  address: 'abcd',
+  city: 'kozhikode',
+  age: '34',
+  phone_no: '9863665432' }
+db.CUSTOMER.aggregate([{$count:"city"}])
+{ city: 4 }
+db.CUSTOMER.aggregate([{$group:{_id:"$city",total:{$sum:1}}}])
+{ _id: 'kochi', total: 1 }
+{ _id: 'Malapuram', total: 1 }
+{ _id: 'kozhikode', total: 1 }
+{ _id: 'Kozhikode', total: 1 }
+db.CuSTOMER.aggregate([{$group:{_id:"",min_age:{$min:"$age"},max_age:{$max:"$age"}}}])
+db.CUSTOMER.aggregate([{$group:{_id:"",min_age:{$min:"$age"},max_age:{$max:"$age"}
+}}])
+{ _id: '', min_age: '34', max_age: '50' }
+db.CUSTOMER.aggregate([{$group:{_id:"$city",min_age:{$min:"$age"},max_age:{$max:"$age"}}}])
+{ _id: 'kochi', min_age: '43', max_age: '43' }
+{ _id: 'Malapuram', min_age: '40', max_age: '40' }
+{ _id: 'kozhikode', min_age: '34', max_age: '34' }
+{ _id: 'Kozhikode', min_age: '50', max_age: '50' }
+
